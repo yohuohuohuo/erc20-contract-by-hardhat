@@ -1,0 +1,15 @@
+{
+  "overrides": [
+    {
+      "files": "*.sol",
+      "options": {
+        "parser": "slang",
+        "plugins": [
+          "prettier-plugin-solidity"
+        ],
+        "printWidth": 160,
+        "tabWidth": 4
+      }
+    }
+  ]
+}
