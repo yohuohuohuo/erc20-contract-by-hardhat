@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "scripts": {
     "build": "npx hardhat compile",
-    "deploy": "npx hardhat run scripts/deploy.ts --network sepolia",
-    "verify": "npx hardhat run scripts/verify.ts --network sepolia"
+    "deploy-contract": "npx hardhat run scripts/deploy.ts --network sepolia",
+    "verify-contract": "npx hardhat run scripts/verify.ts --network sepolia",
+    "upgrade-contract": "npx hardhat run scripts/upgrade.ts --network sepolia"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^2.1.0",

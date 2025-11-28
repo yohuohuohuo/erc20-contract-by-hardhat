@@ -11,7 +11,7 @@ async function main(proxyAddress: string, implementationAddress: string) {
 
   if (!proxyAddress || !implementationAddress) {
     console.error(
-      "Please set PROXY_ADDRESS and IMPLEMENTATION_ADDRESS in .env file or pass them as parameters",
+      "Please pass PROXY_ADDRESS and IMPLEMENTATIONADDRESS as parameters",
     );
     process.exit(1);
   }

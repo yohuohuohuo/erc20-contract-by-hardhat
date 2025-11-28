@@ -22,6 +22,6 @@ contract SmartToken is Initializable, ERC20Upgradeable, ERC20PermitUpgradeable, 
     function _authorizeUpgrade(address newImplementation) internal override onlyOwner {}
 
     function version() public pure returns (string memory) {
-        return "1.0.0";
+        return "1.1.0";
     }
 }
