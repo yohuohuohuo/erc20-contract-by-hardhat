@@ -8,7 +8,7 @@ import {OwnableUpgradeable} from "@openzeppelin/contracts-upgradeable/access/Own
 import {UUPSUpgradeable} from "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 
 contract SmartToken is Initializable, ERC20Upgradeable, ERC20PermitUpgradeable, OwnableUpgradeable, UUPSUpgradeable {
-    uint256 public _maxTotalSupply;
+    uint256 private _maxTotalSupply;
 
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
@@ -26,10 +26,6 @@ contract SmartToken is Initializable, ERC20Upgradeable, ERC20PermitUpgradeable, 
 
     function _authorizeUpgrade(address newImplementation) internal override onlyOwner {}
 
-    function cap() public view returns (uint256) {
-        return _maxTotalSupply;
-    }
-
     function mint(address to, uint256 amount) external onlyOwner {
         require(totalSupply() + amount <= _maxTotalSupply, "MaxTotalSupply exceeded");
         _mint(to, amount);
@@ -42,7 +38,11 @@ contract SmartToken is Initializable, ERC20Upgradeable, ERC20PermitUpgradeable, 
         emit MaxTotalSupplyUpdated(oldMaxTotalSupply, newMaxTotalSupply);
     }
 
+    function getMaxTotalSupply() public view returns (uint256) {
+        return _maxTotalSupply;
+    }
+
     function version() public pure returns (string memory) {
-        return "1.1.0";
+        return "1.1.2";
     }
 }

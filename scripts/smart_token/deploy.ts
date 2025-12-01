@@ -1,5 +1,5 @@
-import { ethers, upgrades, run } from "hardhat";
 import "dotenv/config";
+import { deploy } from "../libs/deploy";
 
 /**
  * https://docs.openzeppelin.com/upgrades-plugins/hardhat-upgrades
@@ -7,36 +7,18 @@ import "dotenv/config";
  */
 async function main() {
   const owner = process.env.CONTRACT_OWNER;
+  const name = "SmartToken";
+  const symbol = "ST001";
+  const initMaxTotalSupply = 10000;
+
   console.log("Deploying contract start", {
     owner,
+    name,
+    symbol,
+    initMaxTotalSupply,
   });
 
-  const contract = await ethers.getContractFactory("SmartToken");
-
-  // first deploy
-  const proxy = await upgrades.deployProxy(contract, [owner], {
-    initializer: "initialize",
-    kind: "uups",
-  });
-  await proxy.waitForDeployment();
-
-  const proxyAddress = await proxy.getAddress();
-  const implementationAddress = await upgrades.erc1967.getImplementationAddress(
-    await proxy.getAddress(),
-  );
-
-  console.log("Proxy deployed to:", proxyAddress);
-  console.log("Implementation deployed to:", implementationAddress);
-  console.log(
-    "Admin (ProxyAdmin) at:",
-    await upgrades.erc1967.getAdminAddress(await proxy.getAddress()),
-  );
-  console.log(
-    `View proxy on Etherscan: https://sepolia.etherscan.io/address/${proxyAddress}`,
-  );
-  console.log(
-    `View implementation on Etherscan: https://sepolia.etherscan.io/address/${implementationAddress}`,
-  );
+  await deploy("SmartToken", [owner, name, symbol, initMaxTotalSupply]);
 }
 
 main().catch((error) => {

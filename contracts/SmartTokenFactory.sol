@@ -10,7 +10,7 @@ import {SmartToken} from "./SmartToken.sol";
 contract SmartTokenFactory is Initializable, OwnableUpgradeable, UUPSUpgradeable {
     address public implementationAddress;
 
-    event TokenCreated(address indexed owner, address indexed tokenAddress, bytes32 projectId, string name, string symbol);
+    event TokenCreated(address indexed owner, address indexed tokenAddress, bytes32 projectId, string name, string symbol, uint256 initMaxTotalSupply);
 
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
@@ -37,7 +37,7 @@ contract SmartTokenFactory is Initializable, OwnableUpgradeable, UUPSUpgradeable
             }
         }
 
-        emit TokenCreated(msg.sender, tokenAddress, _projectId, _name, _symbol);
+        emit TokenCreated(msg.sender, tokenAddress, _projectId, _name, _symbol, _initMaxTotalSupply);
     }
 
     function setImplementationAddress(address _implementationAddress) external onlyOwner {
@@ -46,6 +46,6 @@ contract SmartTokenFactory is Initializable, OwnableUpgradeable, UUPSUpgradeable
     }
 
     function version() public pure returns (string memory) {
-        return "1.0.0";
+        return "1.0.1";
     }
 }

@@ -4,8 +4,9 @@
   "scripts": {
     "build": "npx hardhat compile",
     "deploy-contract": "npx hardhat run scripts/smart_token/deploy.ts --network sepolia",
-    "verify-contract": "npx hardhat run scripts/smart_token/verify.ts --network sepolia",
-    "upgrade-contract": "npx hardhat run scripts/smart_token/upgrade.ts --network sepolia"
+    "deploy-factory": "npx hardhat run scripts/smart_token_factory/deploy.ts --network sepolia",
+    "verify-contract": "npx hardhat run scripts/verify.ts --network sepolia",
+    "upgrade-contract": "npx hardhat run scripts/upgrade.ts --network sepolia"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^2.1.0",
